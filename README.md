@@ -12,6 +12,10 @@ Chrome extension for getting notification when Uber becomes available.
 
 then load use Chrome extension manager to load dist/.
 
+# Usage
+
+Go to m.uber.com, click the uber logo to start monitoring.
+
 # CC0 1.0 Universal
 
 To the extent possible under law, Chia-liang Kao has waived all copyright
