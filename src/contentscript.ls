@@ -32,7 +32,7 @@ check = ->
 
 unext.click ->
   if checking
-    clearTimeeout checking
+    clearTimeout checking
     unext.removeClass 'active'
     checking := null
     return
