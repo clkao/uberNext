@@ -15,10 +15,11 @@ content_scripts: [
     'jquery.min.js'
     'contentscript.js'
   ]
+  css: <[styles.css]>
   run_at: 'document_idle'
   all_frames: true
 ]
-web_accessible_resources: ["bell.wav"]
+web_accessible_resources: <[bell.wav ubernext-128.png]>
 icons:
   48: 'ubernext-48.png'
   128: 'ubernext-128.png'

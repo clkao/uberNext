@@ -16,7 +16,9 @@ scripts:
 dependencies: {}
 devDependencies:
   LiveScript: '^1.2.x'
+  nib: '^1.0.3'
   gulp: '^3.8.6'
   'gulp-livescript': '^1.0.3'
   'gulp-exec': '^2.1.0'
   'gulp-rename': '^1.2.0'
+  'gulp-stylus': '^1.3.0'
