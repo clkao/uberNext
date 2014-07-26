@@ -1,7 +1,7 @@
 uberNext
 ======
 
-[Install on chrome web store]()
+[Install on chrome web store](https://chrome.google.com/webstore/detail/jjfmdmihlopbdahppjepejbjjphjfdca)
 
 Chrome extension for getting notification when Uber becomes available.
 
