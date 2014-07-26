@@ -14,7 +14,9 @@ then load use Chrome extension manager to load dist/.
 
 # Usage
 
-Go to m.uber.com, click the uber logo to start monitoring.
+Go to m.uber.com, click the uberNext logo to start monitoring.  Click again to cancel monitoring.
+
+Note that uberNext only monitors the current type of vechicle.  You can monitor multiple types by open multiple browser tabs with different types of vechicles selected with uberNext.
 
 # CC0 1.0 Universal
 
