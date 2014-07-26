@@ -1,0 +1,21 @@
+@import 'nib'
+@keyframes spin
+  0%
+    transform rotate(0deg)
+
+  100%
+    transform rotate(360deg)
+
+.logo img
+  height 80%
+  position absolute
+  right 10%
+  &.active
+    border 5px solid rgba(0,183,229,0.9)
+    opacity .9
+    background-color rgba(0,0,0,0)
+    border-top 5px solid rgba(0,0,0,0)
+    border-left 5px solid rgba(0,0,0,0)
+    border-radius 50px
+    box-shadow 0 0 35px #2187e7
+    animation spin .5s infinite linear
