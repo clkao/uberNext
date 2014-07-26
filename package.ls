@@ -22,3 +22,4 @@ devDependencies:
   'gulp-exec': '^2.1.0'
   'gulp-rename': '^1.2.0'
   'gulp-stylus': '^1.3.0'
+  'gulp-jade': '^0.7.0'

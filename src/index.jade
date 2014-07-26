@@ -1,0 +1,40 @@
+doctype html
+html(style='min-width: 340px; min-height: 580px;', ng-app="uberNext", ng-csp)
+head
+  meta(charset='utf-8')
+  meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
+  title uberNext
+  link(href='styles.css', rel='stylesheet')
+  link(href='angular-csp.css', rel='stylesheet')
+  link(href='angular-material.css', rel='stylesheet')
+  script(type='text/javascript', src='jquery.min.js')
+  script(type='text/javascript', src='http://localhost:6284/download/latest/oauth.js')
+  script(type='text/javascript', src='angular.js')
+  script(type='text/javascript', src='angular-animate.js')
+  script(type='text/javascript', src='angular-material.js')
+  script(type='text/javascript', src='popup.js')
+body#uberNext(ng-controller="AppCtrl", ng-csp)
+  div(layout="vertical",style="height: 100%")
+    div(layout="horizontal")
+      div(flex)
+        material-button.material-button-colored.material-theme-green#connect(ng-hide="profile",ng-click="connect()") Connect
+        material-button.material-button-colored#check(ng-show="profile",ng-click="check()") Check
+      div(ng-show="profile")
+        img(ng-src="{{profile.avatar}}" class="face")
+    material-input-group.material-input-group-theme-green(layout="horizontal",layout-padding)
+      label
+        | Leaving
+        material-input(type="time",ng-model="departure")
+      label
+        | Buffer
+        material-input(type="number",ng-model="buffer",min="0",max="15")
+      label.selected(flex)
+        span(style="padding-left: 2rem") On Uber
+        ul.vehicles(ng-click="selecting = !selecting")
+          li(ng-repeat="(id, yes) in selected",ng-show="yes") {{ trim(products[id].display_name) }}
+      material-button.material-button-colored.material-theme-orange#go(ng-click="go()") GO
+    material-whiteframe.selector.material-whiteframe-z2(layout="vertical",layout-align="left center",ng-show="selecting")
+      material-checkbox(ng-repeat="(product_id, car) in selected",ng-model="selected[product_id]")
+        | {{products[product_id].display_name }}
+        span(ng-show="estimates[product_id].time") ({{ formatTime(estimates[product_id].time) }} {{ estimates[product_id].n || 1 }}+)
+    iframe#uber-mobile(ng-if="profile",width="100%", height="100%",flex,ng-src="{{iframeSrc}}")

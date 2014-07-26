@@ -1,17 +1,28 @@
-console.dir 'init uberNext', $
-
 <- $
 var checking
 threshold = 15
 console.dir 'init uberNext', $
 
+v-check = ->
+  id = $ '.vehicle-selector li.shift' .data \id
+  n = $ 'div#map img[src*="car-types"]' .length
+  [_, latitude, longitude]? = $ '#map a[href*="maps?ll="]' .attr('href')?match /ll=([-\d.]+),([-\d.]+)/
+  address = $ 'div.map-view p.pickup-location span' .text!
+  [id, n, latitude, longitude, address]
+
+unless window.top == window
+  port = chrome.runtime.connect({name: "uberNext"});
+  port.postMessage type: "init"
+  post = ->
+    [id, n, latitude, longitude, address] = v-check!
+    port.postMessage {type: "update", id, n, latitude, longitude, address} if id
+    set-timeout post, 2000ms
+
+  post!
+  port.onMessage.addListener (msg) ->
 
 icon = chrome.extension.getURL "ubernext-128.png"
 unext = $('<img />').attr \src icon .appendTo ('.logo')
-
-src = chrome.extension.getURL "bell.wav"
-
-$ """<audio id="uber-next-sound"><source src="#{src}"></source></audio>""" .appendTo 'body'
 
 check = ->
   x = $ '.eta strong' .text! |> parseInt
@@ -23,10 +34,10 @@ check = ->
     n = new Notification "uberNext",
       body: "uber #{type || '(unknown)'} in #{x}"
       icon: icon
+    new Audio chrome.extension.getURL "bell.wav" .play!
     n.onclick = ->
       window.focus!
       $ '.set' .trigger 'click'
-    $ '#uber-next-sound' .0.play!
   else 
     checking := setTimeout check, 10 * 1000ms
 
