@@ -12,11 +12,14 @@ Chrome extension for getting notification when Uber becomes available.
 
 then load use Chrome extension manager to load dist/.
 
-# Usage
+# Development
 
-Go to https://m.uber.com, click the uberNext logo to start monitoring.  Click again to cancel monitoring.
-
-Note that uberNext only monitors the current type of vechicle.  You can monitor multiple types by open multiple browser tabs with different types of vechicles selected with uberNext.
+You need get an [Uber API Key](https://developer.uber.com/).  You'll also need
+to run a local [oauthd](https://github.com/clkao/oauthd/tree/uber-provider)
+with the uber provider branch.  Configure your oauthd app with Uber keys, and
+update `src/popup.ls` with the oauthd public key. Make sure you add your local
+chrome extension url to the "Domains available" option in oauthd app:
+`chrome-extension://longstringlongstring`
 
 # CC0 1.0 Universal
 
