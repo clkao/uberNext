@@ -25,9 +25,14 @@ gulp.task 'json' ->
     .pipe gulp-rename 'manifest.json'
     .pipe gulp.dest './dist'
 
-gulp.task 'build' <[json css livescript jade assets]> (cb) ->
+gulp.task 'build' <[json css livescript jade assets]>
+
+gulp.task 'release' <[build]> (cb) ->
   {exec} = require 'child_process'
   err, stdout, stderr <- exec 'cd dist; zip -r ../uberNext.zip *'
   console.log stdout
   console.log stderr
   cb err
+
+gulp.task 'watch' ->
+  gulp.watch 'src/**' <[build]>
