@@ -12,9 +12,9 @@ angular.module 'uberNextBg' <[]>
   hasTokens = $q.defer!
   hasProducts = $q.defer!
   productLocation = {}
-  $rootScope.$watch 'tokens' ->
+  $rootScope.$watch 'tokens' -> if it
     $http.defaults.headers.common.Authorization = it<[token_type access_token]>.join ' '
-    hasTokens.resolve it if it
+    hasTokens.resolve it
 
   var unwatch
   $rootScope.init = ->
