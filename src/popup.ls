@@ -9,8 +9,10 @@ angular.module 'uberNext' <[ngMaterial]>
   | 'products' => $scope.products = msg.products
   | 'estimates' => $scope.estimates = msg.estimates
   | 'address' => $scope.pickup.address = msg.address
-  | 'init' =>
+  | 'status' =>
+  | 'init'
     if msg.monitor
+      $scope.monitoring = true
       $scope.pickup = msg{latitude,longitude,address}
       # XXX: todo
       #$scope.departure = msg{departure}
@@ -47,6 +49,11 @@ angular.module 'uberNext' <[ngMaterial]>
     port.postMessage {type: 'check'}
   $scope.go = ->
     port.postMessage {type: 'monitor', departure: $scope.departure.getTime!} <<< $scope{buffer,selected}
+    $scope.monitoring = true
+  $scope.stopMonitoring = ->
+    $scope.monitoring = false
+    port.postMessage {type: 'pause'}
+
   $scope.connect = ->
     e, r <- OAuth.popup "uber"
     tokens = r{token_type,access_token,expires_in}
@@ -57,7 +64,6 @@ angular.module 'uberNext' <[ngMaterial]>
       $scope.profile = user
 
   $scope.$watch 'products' ->
-    console.log \products it
     $scope.selected = {}
     for id, car of it
       $scope.selected[id] = true

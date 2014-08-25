@@ -118,6 +118,9 @@ angular.module 'uberNextBg' <[]>
         new Audio chrome.extension.getURL "bell.wav" .play!
     ), true
     $rootScope.check!
+  $rootScope.pause = ->
+    unwatch?!
+    clear-timeout cancel if cancel
 
   $rootScope.check = ->
     clear-timeout cancel if cancel

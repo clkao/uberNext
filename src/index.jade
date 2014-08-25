@@ -15,7 +15,7 @@ head
   script(type='text/javascript', src='popup.js')
 body#uberNext(ng-controller="AppCtrl", ng-csp)
   div(layout="vertical",style="height: 100%")
-    div(layout="horizontal")
+    //div(layout="horizontal")
       div(flex)
         material-button.material-button-colored.material-theme-green#connect(ng-hide="profile",ng-click="connect()") Connect
         material-button.material-button-colored#check(ng-show="profile",ng-click="check()") Check
@@ -32,7 +32,8 @@ body#uberNext(ng-controller="AppCtrl", ng-csp)
         span(style="padding-left: 2rem") On Uber
         ul.vehicles(ng-click="selecting = !selecting")
           li(ng-repeat="(id, yes) in selected",ng-show="yes") {{ trim(products[id].display_name) }}
-      material-button.material-button-colored.material-theme-orange#go(ng-click="go()") GO
+      material-button.material-button-colored.material-theme-orange#go(ng-hide="monitoring",ng-click="go()") GO
+      material-button.material-button-colored.material-theme-red#stop(ng-show="monitoring",ng-click="stopMonitoring()") ✖
     material-whiteframe.selector.material-whiteframe-z2(layout="vertical",layout-align="left center",ng-show="selecting")
       material-checkbox(ng-repeat="(product_id, car) in selected",ng-model="selected[product_id]")
         | {{products[product_id].display_name }}
