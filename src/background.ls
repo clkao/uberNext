@@ -96,8 +96,8 @@ angular.module 'uberNextBg' <[]>
       return unless wanted.length
       buttons = wanted.map ({product_id, eta, time}) ->
         title: $rootScope.products[product_id].display_name + ' ' + Math.round(time/60)+'m'+(time%60)+'s'
+      .sort (a, b) -> a.eta - b.eta
 
-      # XXX sort
       console.log \wanted wanted
       opts = do
         type: "basic"
@@ -115,7 +115,13 @@ angular.module 'uberNextBg' <[]>
         notification! unless updated
       else
         notification!
-        new Audio chrome.extension.getURL "bell.wav" .play!
+        min = Math.round wanted.0.time/60
+        #new Audio chrome.extension.getURL "bell.wav" .play!
+        lang = chrome.i18n.getUILanguage!toLowerCase!
+        text = match lang
+        | 'zh-tw' => "講個秘訣：您的優步將在 #min 分鐘後抵達"
+        else => "Uber available in #min minutes"
+        chrome.tts.speak text, {lang}
     ), true
     $rootScope.check!
   $rootScope.pause = ->
